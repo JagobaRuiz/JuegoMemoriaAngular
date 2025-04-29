@@ -9,5 +9,5 @@
 </div>
 
 
-
+<app-carta *ngFor="let carta of cartas" [carta]="carta" (cartaGirada)="girarYcomprobarCarta(carta)"></app-carta>
 

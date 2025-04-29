@@ -1,11 +1,14 @@
 import { Component } from '@angular/core';
 import {Carta} from '../../models/carta.model';
-import {NgIf} from '@angular/common';
+import {NgForOf, NgIf} from '@angular/common';
+import {CartaComponent} from '../carta/carta.component';
 
 @Component({
   selector: 'app-inicio',
   imports: [
-    NgIf
+    NgIf,
+    CartaComponent,
+    NgForOf
   ],
   templateUrl: './inicio.component.html',
   styleUrl: './inicio.component.scss'
@@ -22,28 +25,70 @@ export class InicioComponent {
   palos = ['picas', 'corazones', 'diamantes', 'treboles'];
   valores = ['a', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'j', 'q', 'k'];
 
+  cartasGiradas: Carta[] = [];
+  estaComprobando = false;
+
   elegirDificultad(nivel: string) {
     this.dificultadElegida = nivel;
-    // this.cartas = generarCartas(this.nivelesDificultad[nivel]); // Genera cartas con el nivel elegido
+    this.cartas = this.generarCartas(this.nivelesDificultad[nivel as keyof typeof this.nivelesDificultad]); // Genera un número de cartas acorde a la dificultad elegida
   }
 
-  // const generateCards = (pairCount: number): Card[] => {
-  //   const deck: Card[] = [];
-  //
-  //   while (deck.length < pairCount * 2) {
-  //     const value = values[Math.floor(Math.random() * values.length)];
-  //     const suit = suits[Math.floor(Math.random() * suits.length)];
-  //     const imagePath = `assets/cards/${value.toLowerCase()}_${suit.toLowerCase()}.png`;
-  //
-  //     const card: Card = { id: deck.length, value, suit, image: imagePath, isFlipped: false, isMatched: false };
-  //
-  //     if (!deck.some(c => c.value === card.value && c.suit === card.suit)) {
-  //       deck.push({...card}, {...card}); // Agregar el par
-  //     }
-  //   }
-  //
-  //   return shuffleFisherYates(deck); // Mezclar cartas de manera justa
-  // };
+  generarCartas = (numParejas: number): Carta[] => {
+    const baraja: Carta[] = [];
+
+    while (baraja.length < numParejas * 2) {
+      const valor = this.valores[Math.floor(Math.random() * this.valores.length)];
+      const palo = this.palos[Math.floor(Math.random() * this.palos.length)];
+      const rutaImg = 'assets/cartas' + '/' + valor.toLowerCase() + '_' + palo.toLowerCase() + '.png';
+
+      const carta: Carta = {valor, palo, imagen: rutaImg, estaGirada: false, estaEmparejada: false };
+
+      if (!baraja.some(c => c.valor === carta.valor && c.palo === carta.palo)) {
+        baraja.push({...carta}, {...carta}); // Agregar el par
+      }
+    }
+
+    return this.desordenarBaraja(baraja); // Mezclar cartas de manera justa
+  };
+
+  desordenarBaraja(baraja: Carta[]): Carta[] {
+    for (let i = baraja.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1)); // Selecciona un índice aleatorio dentro del rango válido
+      [baraja[i], baraja[j]] = [baraja[j], baraja[i]]; // Intercambia los elementos
+    }
+    return baraja;
+  }
+
+
+  girarYcomprobarCarta(carta: Carta) {
+    console.log(carta);
+    if (!this.estaComprobando && !carta.estaGirada && !carta.estaEmparejada) {
+      carta.estaGirada = true;
+      this.cartasGiradas.push(carta);
+
+      if (this.cartasGiradas.length === 2) {
+        this.estaComprobando = true;
+        setTimeout(() => {
+          this.comprobarPareja();
+          this.estaComprobando = false;
+        }, 1000);
+      }
+    }
+  }
+
+  comprobarPareja() {
+    const [carta1, carta2] = this.cartasGiradas;
+
+    if (carta1.valor === carta2.valor && carta1.palo === carta2.palo) {
+      carta1.estaEmparejada = true;
+      carta2.estaEmparejada = true;
+    } else {
+      carta1.estaGirada = false;
+      carta2.estaGirada = false;
+    }
+
+    this.cartasGiradas = [];
+  }
 
 
 
