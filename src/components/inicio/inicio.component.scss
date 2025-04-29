@@ -1,3 +1,23 @@
+//@font-face {
+//  font-family: 'SaloonExt Th';
+//  src: url('/assets/fonts/SaloonExt Th.ttf') format('truetype');
+//  font-weight: normal;
+//  font-style: normal;
+//}
+
+@font-face {
+  font-family: 'SaloonExtTh';
+  src: url('/assets/fonts/SaloonExtTh.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  font-family: 'SaloonExtTh', sans-serif;
+}
+
+
+
 .botones-dificultad {
   display: flex;
   gap: 10px;
