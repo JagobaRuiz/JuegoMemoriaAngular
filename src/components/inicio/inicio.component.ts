@@ -27,6 +27,9 @@ export class InicioComponent {
 
   cartasGiradas: Carta[] = [];
   estaComprobando = false;
+  parejasHechas: number = 0;
+  numParejas: number = 0;
+  finPartida: boolean = false;
 
   elegirDificultad(nivel: string) {
     this.dificultadElegida = nivel;
@@ -34,6 +37,7 @@ export class InicioComponent {
   }
 
   generarCartas = (numParejas: number): Carta[] => {
+    this.numParejas = numParejas;
     const baraja: Carta[] = [];
 
     while (baraja.length < numParejas * 2) {
@@ -61,7 +65,7 @@ export class InicioComponent {
 
 
   girarYcomprobarCarta(carta: Carta) {
-    console.log(carta);
+    // console.log(carta);
     if (!this.estaComprobando && !carta.estaGirada && !carta.estaEmparejada) {
       carta.estaGirada = true;
       this.cartasGiradas.push(carta);
@@ -80,18 +84,32 @@ export class InicioComponent {
     const [carta1, carta2] = this.cartasGiradas;
 
     if (carta1.valor === carta2.valor && carta1.palo === carta2.palo) {
-      carta1.estaEmparejada = true;
-      carta2.estaEmparejada = true;
+      setTimeout(() => {
+        carta1.estaEmparejada = true;
+        carta2.estaEmparejada = true;
+
+        //Borrar la carta del array
+        setTimeout(() => {
+          this.cartas = this.cartas.filter(c => c !== carta1 && c !== carta2);
+        }, 500); // 500ms = duración de la animación
+      }, 50);
+      this.parejasHechas++;
+      this.comprobarFinDePartida();
+
+      // console.log(carta1.estaEmparejada + ' - ' + carta2.estaEmparejada);
     } else {
-      carta1.estaGirada = false;
-      carta2.estaGirada = false;
+        carta1.estaGirada = false;
+        carta2.estaGirada = false;
     }
 
     this.cartasGiradas = [];
   }
 
-
-
+  comprobarFinDePartida() {
+    if (this.parejasHechas === this.numParejas) {
+      this.finPartida = true;
+    }
+  }
 
 
 

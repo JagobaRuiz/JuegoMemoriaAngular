@@ -11,3 +11,5 @@
 
 <app-carta *ngFor="let carta of cartas" [carta]="carta" (cartaGirada)="girarYcomprobarCarta(carta)"></app-carta>
 
+<h2 *ngIf="finPartida">¡ENHORABUENA, JUEGO COMPLETADO!</h2>
+

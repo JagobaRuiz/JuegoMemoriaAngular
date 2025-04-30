@@ -1,4 +1,4 @@
-<div class="carta" [ngClass]="{'girada': carta.estaGirada }" (click)="girarCarta()">
+<div class="carta" [@desaparecer]="estadoCarta" [ngClass]="{'girada': carta.estaGirada, 'oculto': carta.estaEmparejada }" (click)="girarCarta()">
   <img *ngIf="carta.estaGirada || carta.estaEmparejada" [ngSrc]="carta.imagen" width="100" height="150" alt="">
   <img *ngIf="!carta.estaGirada" class="parte-trasera" [ngSrc]="'assets/cartas/parte_trasera.png'" alt="" width="100"
        height="150">
