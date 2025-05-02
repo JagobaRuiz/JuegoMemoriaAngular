@@ -30,10 +30,13 @@ export class InicioComponent {
   parejasHechas: number = 0;
   numParejas: number = 0;
   finPartida: boolean = false;
+  cronometro: number = 0;
+  idIntervalo: any;
 
   elegirDificultad(nivel: string) {
     this.dificultadElegida = nivel;
     this.cartas = this.generarCartas(this.nivelesDificultad[nivel as keyof typeof this.nivelesDificultad]); // Genera un número de cartas acorde a la dificultad elegida
+    this.empezarJuego();
   }
 
   generarCartas = (numParejas: number): Carta[] => {
@@ -61,6 +64,21 @@ export class InicioComponent {
       [baraja[i], baraja[j]] = [baraja[j], baraja[i]]; // Intercambia los elementos
     }
     return baraja;
+  }
+
+  empezarCronometro() {
+    this.idIntervalo = setInterval(() => {
+      this.cronometro++;
+    }, 1000); // Aumenta cada segundo
+  }
+
+  pararCronometro() {
+    clearInterval(this.idIntervalo);
+  }
+
+  empezarJuego() {
+    this.cronometro = 0;
+    this.empezarCronometro();
   }
 
 
@@ -107,14 +125,28 @@ export class InicioComponent {
 
   comprobarFinDePartida() {
     if (this.parejasHechas === this.numParejas) {
-      this.finPartida = true;
+      this.pararCronometro();
+      setTimeout(() => { // pongo timeOut a 50 para que de tiempo a que desaparezca de pantalla la última pareja,
+        //ya que al poner finPartida en true se muestra en pantalla el aviso de fin de partida y el botón de jugar de nuevo
+        this.finPartida = true;
+        // this.pararCronometro();
+      }, 600);
     }
+
+  }
+
+  jugarDeNuevo() {
+    this.finPartida = false;
+    this.parejasHechas = 0;
+    this.numParejas = 0;
+    this.dificultadElegida = null;
+    this.cartas = [];
   }
 
 
-
-
-
-
-
+  formatearTiempo(segundos: number) {
+    const minutos = Math.floor(segundos / 60); // Calcula los minutos
+    const segundosRestantes = segundos % 60; // Calcula los segundos restantes
+    return minutos.toString().padStart(2, '0') + ' : ' + segundosRestantes.toString().padStart(2, '0'); //padStart pone el 0 delante cuando haya solo 1 dígito
+  }
 }

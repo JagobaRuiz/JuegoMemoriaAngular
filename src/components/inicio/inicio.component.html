@@ -11,5 +11,14 @@
 
 <app-carta *ngFor="let carta of cartas" [carta]="carta" (cartaGirada)="girarYcomprobarCarta(carta)"></app-carta>
 
-<h2 *ngIf="finPartida">¡ENHORABUENA, JUEGO COMPLETADO!</h2>
+<div class="cronometro" *ngIf="dificultadElegida && !finPartida">
+  <span class="reloj">⏳</span> Tiempo: {{ formatearTiempo(cronometro) }}
+</div>
+
+<div *ngIf="finPartida" class="fin-partida">
+  <h2>¡ENHORABUENA, JUEGO COMPLETADO!</h2>
+  <div class="contenedor-boton-jugar-de-nuevo">
+    <button class="btn btn-primary jugar-de-nuevo" (click)="jugarDeNuevo()"> Jugar otra vez</button>
+  </div>
+</div>
 

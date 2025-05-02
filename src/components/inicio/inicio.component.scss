@@ -48,3 +48,31 @@ button:hover {
   text-align: center;
   margin-top: 1em;
 }
+
+.contenedor-boton-jugar-de-nuevo {
+  width: 100%; /* Asegura que el contenedor ocupe toda la fila */
+  display: flex;
+  justify-content: center; /* Centra el botón */
+  margin-top: 20px;
+}
+
+.cronometro {
+  text-align: center;
+  font-size: 24px;
+}
+
+@keyframes girar { /*Crear el giro de 360 grados del reloj*/
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.reloj {
+  display: inline-block;
+  font-size: 24px;
+  animation: girar 1s linear infinite;
+}
+
+
+.prueba {
+  position: fixed;
+}
