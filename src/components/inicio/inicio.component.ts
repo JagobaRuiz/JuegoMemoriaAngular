@@ -1,19 +1,22 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Carta} from '../../models/carta.model';
-import {NgForOf, NgIf} from '@angular/common';
+import {DatePipe, NgClass, NgForOf, NgIf} from '@angular/common';
 import {CartaComponent} from '../carta/carta.component';
+import {Historial} from '../../models/historial.model';
 
 @Component({
   selector: 'app-inicio',
   imports: [
     NgIf,
     CartaComponent,
-    NgForOf
+    NgForOf,
+    DatePipe,
+    NgClass
   ],
   templateUrl: './inicio.component.html',
   styleUrl: './inicio.component.scss'
 })
-export class InicioComponent {
+export class InicioComponent implements OnInit {
   nivelesDificultad = {
     facil: 3,
     intermedio: 6,
@@ -24,6 +27,7 @@ export class InicioComponent {
   cartas: Carta[] = [];
   palos = ['picas', 'corazones', 'diamantes', 'treboles'];
   valores = ['a', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'j', 'q', 'k'];
+  hayPartidaEnJuego: boolean = false;
 
   cartasGiradas: Carta[] = [];
   estaComprobando = false;
@@ -32,6 +36,15 @@ export class InicioComponent {
   finPartida: boolean = false;
   cronometro: number = 0;
   idIntervalo: any;
+
+  historial: Historial[] = [];
+
+  ngOnInit(): void {
+    const historialGuardado = localStorage.getItem('historial');
+    if (historialGuardado) {
+      this.historial = JSON.parse(historialGuardado) as Historial[];
+    }
+  }
 
   elegirDificultad(nivel: string) {
     this.dificultadElegida = nivel;
@@ -77,6 +90,7 @@ export class InicioComponent {
   }
 
   empezarJuego() {
+    this.hayPartidaEnJuego = true;
     this.cronometro = 0;
     this.empezarCronometro();
   }
@@ -129,10 +143,37 @@ export class InicioComponent {
       setTimeout(() => { // pongo timeOut a 50 para que de tiempo a que desaparezca de pantalla la última pareja,
         //ya que al poner finPartida en true se muestra en pantalla el aviso de fin de partida y el botón de jugar de nuevo
         this.finPartida = true;
+        this.hayPartidaEnJuego = false;
         // this.pararCronometro();
       }, 600);
+      this.agregarAhistorial();
+    }
+  }
+
+  agregarAhistorial() {
+    let dificultad: string = '';
+    if (this.dificultadElegida === 'facil') {
+      dificultad = 'Fçcil';
+    }
+    if (this.dificultadElegida === 'intermedio') {
+      dificultad = 'Intermedio';
+    }
+    if (this.dificultadElegida === 'dificil') {
+      dificultad = 'Difêcil';
     }
 
+    let lineaHistorial: Historial = {
+      dificultad: dificultad,
+      tiempo: this.formatearTiempo(this.cronometro),
+      fecha: new Date(Date.now())
+    };
+
+    if (this.historial.length >= 10) {
+      this.historial.shift();
+    }
+
+    this.historial.push(lineaHistorial);
+    localStorage.setItem('historial', JSON.stringify(this.historial));
   }
 
   jugarDeNuevo() {

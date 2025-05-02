@@ -1,1 +1,32 @@
 /* You can add global styles to this file, and also import other style files */
+
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #008000 !important; /* Verde más claro en filas alternas */
+}
+
+:root {
+  --fondo-tabla: #006400; /* Verde tapete */
+  --texto-tabla: white;
+  --borde-tabla: #FFD700; /* Dorado */
+}
+
+.table {
+  background-color: var(--fondo-tabla) !important;
+  color: var(--texto-tabla) !important;
+  border: 2px solid var(--borde-tabla) !important;
+}
+
+.table th {
+  background-color: #008000 !important;
+  color: var(--texto-tabla) !important;
+  border: 2px solid var(--borde-tabla) !important;
+
+}
+.table td {
+  background-color: #008000 !important;
+  color: var(--texto-tabla) !important;
+  border: 2px solid var(--borde-tabla) !important;
+
+}
+

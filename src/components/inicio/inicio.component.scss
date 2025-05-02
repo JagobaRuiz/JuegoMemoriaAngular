@@ -40,14 +40,20 @@ button:hover {
   display: flex;
   justify-content: center;  /* Centra horizontalmente */
   align-items: center;       /* Centra verticalmente */
-  height: 50vh;             /* Ocupa toda la altura de la pantalla */
+  //height: 20vh;             /* Ocupa toda la altura de la pantalla */
 }
 
 
-.h1, h2 {
+.h1, h2, h3 {
   text-align: center;
   margin-top: 1em;
+  color: #FFD700;
 }
+
+.h1 {
+  margin-bottom: 2em;
+}
+
 
 .contenedor-boton-jugar-de-nuevo {
   width: 100%; /* Asegura que el contenedor ocupe toda la fila */
@@ -76,3 +82,151 @@ button:hover {
 .prueba {
   position: fixed;
 }
+
+h3 {
+  margin-bottom: 1em;
+}
+
+
+table {
+  border-collapse: collapse;
+  border: 1px solid #ddd;
+  width: 100%;
+  margin: 1em 0;
+  font-size: 1em;
+  background-color: rgba(0, 100, 0, 0.8) !important; /* Verde oscuro semi-transparente */
+  border-radius: 8px; /* Bordes redondeados */
+  padding: 10px;
+  color: white; /* Texto blanco para contraste */
+}
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+th, td {
+  border-bottom: 2px solid #ffffff30; /* Líneas de separación semi-translúcidas */
+}
+
+
+@media (max-width: 768px) {
+  table {
+    font-size: 0.9em;
+  }
+}
+
+tr:hover {
+  background-color: #f9f9f9;
+}
+
+table {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+//table, .table {
+//  font-family: 'Roboto', sans-serif !important;
+//}
+
+//.tablero {
+//  display: flex;
+//  flex-wrap: wrap; /* Permite que las cartas se organicen en filas */
+//  justify-content: center; /* Centra horizontalmente */
+//  align-items: center; /* Centra verticalmente */
+//  gap: 15px; /* Espaciado entre cartas */
+//}
+
+.tablero {
+  display: grid;
+  grid-template-columns: repeat(3, auto); /* 3 cartas por fila con tamaño automático */
+  gap: 15px; /* Espaciado entre cartas */
+  justify-content: center; /* Centrar las cartas en el tablero */
+  //width: fit-content; /* Hace que el tablero solo ocupe el espacio necesario */
+  margin: 0 auto; /* Centra el tablero dentro de la página */
+}
+
+.tablero.dificil {
+  display: grid;
+  grid-template-columns: repeat(6, auto); /* 4 cartas por fila */
+  gap: 10px; /* Menos espacio para encajar mejor */
+  justify-content: center;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.carta {
+  flex: 0 1 calc(33.33% - 10px); /* 3 cartas por fila, con ajuste de espacio */
+  max-width: 120px; /* Ajusta según el tamaño deseado */
+}
+
+.contenedor-principal {
+  background-color: #007f00;
+  box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.5);
+  min-height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  //height: 100%;
+}
+
+.container {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  width: 100%; /* Asegura que ocupe todo el ancho disponible */
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+li {
+  margin: 0 1em;
+}
+
+i {
+  margin-right: 0.5em;
+}
+
+///* 4 cartas por fila en pantallas grandes */
+//@media (min-width: 1024px) {
+//  .tablero {
+//    grid-template-columns: repeat(4, auto);
+//  }
+//}
+//
+///* 3 cartas por fila en pantallas medianas */
+//@media (max-width: 1023px) {
+//  .tablero {
+//    grid-template-columns: repeat(3, auto);
+//  }
+//}
+//
+///* 2 cartas por fila en pantallas pequeñas */
+//@media (max-width: 768px) {
+//  .tablero {
+//    grid-template-columns: repeat(3, auto);
+//  }
+//}
+//
+///* 1 carta por fila en móviles */
+//@media (max-width: 480px) {
+//  .tablero {
+//    grid-template-columns: repeat(3, auto);
+//  }
+//}
+//app-carta {
+//  display: flex;
+//  justify-content: center;
+//  align-items: center;
+//  width: 120px; /* Ajusta según el diseño */
+//  height: 180px;
+//}

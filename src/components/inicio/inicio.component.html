@@ -1,24 +1,62 @@
-<h1 class="h1">JAGO'S SALOON</h1>
+<div class="contenedor-principal">
+  <h1 class="h1">JAGO'S SALOON</h1>
 
-<div class="contenedor-botones-dificultad" *ngIf="!dificultadElegida">
-  <div class="botones-dificultad">
-    <button class="btn btn-primary" (click)="elegirDificultad('facil')">Fçcil</button>
-    <button class="btn btn-primary" (click)="elegirDificultad('intermedio')">Intermedio</button>
-    <button class="btn btn-primary" (click)="elegirDificultad('dificil')">Difêcil</button>
+  <h3 *ngIf="!dificultadElegida && !hayPartidaEnJuego">Elêge dificultad:</h3>
+  <div class="contenedor-botones-dificultad" *ngIf="!dificultadElegida && !hayPartidaEnJuego">
+    <div class="botones-dificultad">
+      <button class="btn btn-primary" (click)="elegirDificultad('facil')">Fçcil</button>
+      <button class="btn btn-primary" (click)="elegirDificultad('intermedio')">Intermedio</button>
+      <button class="btn btn-primary" (click)="elegirDificultad('dificil')">Difêcil</button>
+    </div>
   </div>
-</div>
 
+  <div class="tablero" [ngClass]="{'dificil': dificultadElegida === 'dificil'}">
+    <app-carta class="carta" *ngFor="let carta of cartas" [carta]="carta" (cartaGirada)="girarYcomprobarCarta(carta)"></app-carta>
 
-<app-carta *ngFor="let carta of cartas" [carta]="carta" (cartaGirada)="girarYcomprobarCarta(carta)"></app-carta>
-
-<div class="cronometro" *ngIf="dificultadElegida && !finPartida">
-  <span class="reloj">⏳</span> Tiempo: {{ formatearTiempo(cronometro) }}
-</div>
-
-<div *ngIf="finPartida" class="fin-partida">
-  <h2>¡ENHORABUENA, JUEGO COMPLETADO!</h2>
-  <div class="contenedor-boton-jugar-de-nuevo">
-    <button class="btn btn-primary jugar-de-nuevo" (click)="jugarDeNuevo()"> Jugar otra vez</button>
   </div>
-</div>
 
+  <div class="cronometro" *ngIf="hayPartidaEnJuego">
+    <span class="reloj">⏳</span> Tiempo: {{ formatearTiempo(cronometro) }}
+  </div>
+
+  <div *ngIf="finPartida" class="fin-partida">
+    <h2>¡ENHORABUENA, JUEGO COMPLETADO!</h2>
+    <h3>Tiempo: {{ formatearTiempo(cronometro) }}</h3>
+    <div class="contenedor-boton-jugar-de-nuevo">
+      <button class="btn btn-primary jugar-de-nuevo" (click)="jugarDeNuevo()"> Jugar otra vez</button>
+    </div>
+  </div>
+
+  <div class="container mt-4 justify-content-center" *ngIf="!hayPartidaEnJuego">
+    <div class="row g-4 row-cols-lg-1">
+      <div class="col-auto">
+        <h3>Top partidas</h3>
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th scope="col">Tiempo</th>
+            <th scope="col">Dificultad</th>
+            <th scope="col">Fecha</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let lineaHistorial of historial">
+            <td>{{ lineaHistorial.tiempo}}</td>
+            <td>{{ lineaHistorial.dificultad }}</td>
+            <td>{{ lineaHistorial.fecha | date:'dd/MM/yyyy' }}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="mt-5 pt-5"></div>
+
+  <footer class="p-2 fixed-bottom">
+    <ul>
+      <li><a><i class="bi bi-c-circle"></i>2025 Jagoba Ruiz</a></li>
+      <li><a href="https://github.com/JagobaRuiz/ConversorDivisasAngular"><i class="bi bi-github"></i>GitHub de la aplicación </a></li>
+    </ul>
+  </footer>
+
+</div>
