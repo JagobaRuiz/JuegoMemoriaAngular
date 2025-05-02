@@ -1,5 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 
+@font-face {
+  font-family: 'SaloonExtTh';
+  src: url('./assets/fonts/SaloonExtTh.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  font-family: 'SaloonExtTh', sans-serif;
+}
 
 .table-striped tbody tr:nth-of-type(odd) {
   background-color: #008000 !important; /* Verde más claro en filas alternas */
