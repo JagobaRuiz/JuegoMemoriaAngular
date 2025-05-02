@@ -40,7 +40,7 @@ export class InicioComponent implements OnInit {
   historial: Historial[] = [];
 
   ngOnInit(): void {
-    const historialGuardado = localStorage.getItem('historial');
+    const historialGuardado = localStorage.getItem('historialJuego');
     if (historialGuardado) {
       this.historial = JSON.parse(historialGuardado) as Historial[];
     }
@@ -171,7 +171,7 @@ export class InicioComponent implements OnInit {
     }
 
     this.historial.push(lineaHistorial);
-    localStorage.setItem('historial', JSON.stringify(this.historial));
+    localStorage.setItem('historialJuego', JSON.stringify(this.historial));
   }
 
   jugarDeNuevo() {
