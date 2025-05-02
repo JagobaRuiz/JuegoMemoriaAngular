@@ -2,12 +2,12 @@
 
 @font-face {
   font-family: 'SaloonExtTh';
-  src: url('./assets/fonts/SaloonExtTh.woff') format('woff');
+  src: url('assets/fonts/SaloonExtTh.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
 
-* {
+body {
   font-family: 'SaloonExtTh', sans-serif;
 }
 
