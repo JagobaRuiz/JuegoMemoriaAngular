@@ -33,7 +33,6 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 export class CartaComponent implements AfterViewChecked {
   @Input() carta!: Carta;
   @Output() cartaGirada = new EventEmitter<Carta>();
-  // estadoCarta: string = 'visible'
 
   constructor(private cdRef: ChangeDetectorRef) {
   }
@@ -46,13 +45,10 @@ export class CartaComponent implements AfterViewChecked {
 
 
   get estadoCarta() {
-    console.log('Estado de la carta:', this.carta.estaEmparejada ? 'oculto' : 'visible');
     return this.carta.estaEmparejada ? 'oculto' : 'visible'; //Devuelve oculto si está emparejada o visible si todavía no está emparejada
   }
 
-  ngAfterViewChecked(): void {
-    // this.estadoCarta =  this.carta.estaEmparejada ? 'oculto' : 'visible';
+  ngAfterViewChecked(): void { //Actualiza cuando detecta cambios para ejecutar el get estadoCarta ya que de eso depende el efecto de desaparecer
     this.cdRef.detectChanges();
-    console.log('Estado de la carta:', this.carta.estaEmparejada ? 'oculto' : 'visible');
   }
 }

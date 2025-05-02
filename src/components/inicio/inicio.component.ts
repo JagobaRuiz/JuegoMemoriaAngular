@@ -97,7 +97,7 @@ export class InicioComponent implements OnInit {
 
 
   girarYcomprobarCarta(carta: Carta) {
-    // console.log(carta);
+
     if (!this.estaComprobando && !carta.estaGirada && !carta.estaEmparejada) {
       carta.estaGirada = true;
       this.cartasGiradas.push(carta);
@@ -127,8 +127,6 @@ export class InicioComponent implements OnInit {
       }, 50);
       this.parejasHechas++;
       this.comprobarFinDePartida();
-
-      // console.log(carta1.estaEmparejada + ' - ' + carta2.estaEmparejada);
     } else {
         carta1.estaGirada = false;
         carta2.estaGirada = false;

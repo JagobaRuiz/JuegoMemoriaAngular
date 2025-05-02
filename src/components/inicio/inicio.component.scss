@@ -1,10 +1,3 @@
-//@font-face {
-//  font-family: 'SaloonExt Th';
-//  src: url('/assets/fonts/SaloonExt Th.ttf') format('truetype');
-//  font-weight: normal;
-//  font-style: normal;
-//}
-
 @font-face {
   font-family: 'SaloonExtTh';
   src: url('/assets/fonts/SaloonExtTh.woff') format('woff');
@@ -38,9 +31,8 @@ button:hover {
 
 .contenedor-botones-dificultad {
   display: flex;
-  justify-content: center;  /* Centra horizontalmente */
-  align-items: center;       /* Centra verticalmente */
-  //height: 20vh;             /* Ocupa toda la altura de la pantalla */
+  justify-content: center;
+  align-items: center;
 }
 
 
@@ -56,9 +48,9 @@ button:hover {
 
 
 .contenedor-boton-jugar-de-nuevo {
-  width: 100%; /* Asegura que el contenedor ocupe toda la fila */
+  width: 100%;
   display: flex;
-  justify-content: center; /* Centra el botón */
+  justify-content: center;
   margin-top: 20px;
 }
 
@@ -94,10 +86,10 @@ table {
   width: 100%;
   margin: 1em 0;
   font-size: 1em;
-  background-color: rgba(0, 100, 0, 0.8) !important; /* Verde oscuro semi-transparente */
-  border-radius: 8px; /* Bordes redondeados */
+  background-color: rgba(0, 100, 0, 0.8) !important;
+  border-radius: 8px;
   padding: 10px;
-  color: white; /* Texto blanco para contraste */
+  color: white;
 }
 th, td {
   border: 1px solid #ddd;
@@ -110,7 +102,7 @@ th {
 }
 
 th, td {
-  border-bottom: 2px solid #ffffff30; /* Líneas de separación semi-translúcidas */
+  border-bottom: 2px solid #ffffff30;
 }
 
 
@@ -128,39 +120,26 @@ table {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-//table, .table {
-//  font-family: 'Roboto', sans-serif !important;
-//}
-
-//.tablero {
-//  display: flex;
-//  flex-wrap: wrap; /* Permite que las cartas se organicen en filas */
-//  justify-content: center; /* Centra horizontalmente */
-//  align-items: center; /* Centra verticalmente */
-//  gap: 15px; /* Espaciado entre cartas */
-//}
-
 .tablero {
   display: grid;
-  grid-template-columns: repeat(3, auto); /* 3 cartas por fila con tamaño automático */
-  gap: 15px; /* Espaciado entre cartas */
-  justify-content: center; /* Centrar las cartas en el tablero */
-  //width: fit-content; /* Hace que el tablero solo ocupe el espacio necesario */
-  margin: 0 auto; /* Centra el tablero dentro de la página */
+  grid-template-columns: repeat(3, auto);
+  gap: 15px;
+  justify-content: center;
+  margin: 0 auto;
 }
 
 .tablero.dificil {
   display: grid;
-  grid-template-columns: repeat(6, auto); /* 4 cartas por fila */
-  gap: 10px; /* Menos espacio para encajar mejor */
+  grid-template-columns: repeat(6, auto);
+  gap: 10px;
   justify-content: center;
   width: fit-content;
   margin: 0 auto;
 }
 
 .carta {
-  flex: 0 1 calc(33.33% - 10px); /* 3 cartas por fila, con ajuste de espacio */
-  max-width: 120px; /* Ajusta según el tamaño deseado */
+  flex: 0 1 calc(33.33% - 10px);
+  max-width: 120px;
 }
 
 .contenedor-principal {
@@ -176,8 +155,8 @@ table {
 
 .container {
   display: flex;
-  justify-content: center; /* Centra horizontalmente */
-  width: 100%; /* Asegura que ocupe todo el ancho disponible */
+  justify-content: center;
+  width: 100%;
 }
 
 ul {
@@ -195,38 +174,3 @@ li {
 i {
   margin-right: 0.5em;
 }
-
-///* 4 cartas por fila en pantallas grandes */
-//@media (min-width: 1024px) {
-//  .tablero {
-//    grid-template-columns: repeat(4, auto);
-//  }
-//}
-//
-///* 3 cartas por fila en pantallas medianas */
-//@media (max-width: 1023px) {
-//  .tablero {
-//    grid-template-columns: repeat(3, auto);
-//  }
-//}
-//
-///* 2 cartas por fila en pantallas pequeñas */
-//@media (max-width: 768px) {
-//  .tablero {
-//    grid-template-columns: repeat(3, auto);
-//  }
-//}
-//
-///* 1 carta por fila en móviles */
-//@media (max-width: 480px) {
-//  .tablero {
-//    grid-template-columns: repeat(3, auto);
-//  }
-//}
-//app-carta {
-//  display: flex;
-//  justify-content: center;
-//  align-items: center;
-//  width: 120px; /* Ajusta según el diseño */
-//  height: 180px;
-//}
