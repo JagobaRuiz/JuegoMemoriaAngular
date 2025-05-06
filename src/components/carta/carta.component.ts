@@ -37,12 +37,15 @@ export class CartaComponent /*implements AfterViewChecked*/ {
   constructor(private cdRef: ChangeDetectorRef) {
   }
 
-  girarCarta() {
+  girarCarta(carta: HTMLElement) {
     if (!this.carta.estaGirada && !this.carta.estaEmparejada) {
       this.cartaGirada.emit(this.carta); // Notificar al inicio.component que se ha girado una carta
-      setTimeout(() => {
-        this.cdRef.detectChanges(); // Espera unos milisegundos antes de forzar el cambio
-      }, 50);
+      // carta.classList.add('girada');
+      if (carta.classList.contains('girada')) {
+        carta.classList.remove('girada'); // Si ya está girada, la quitamos
+      } else {
+        carta.classList.add('girada'); // Si no está girada, la agregamos
+      }
     }
   }
 
