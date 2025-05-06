@@ -27,6 +27,11 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
       state('visible', style({ opacity: 1 })),
       state('oculto', style({ opacity: 0, transform: 'scale(0)' })),
       transition('visible => oculto', [animate('0.5s ease-out')])
+    ]),
+    trigger('girarCarta', [
+      state('girada', style({ transform: 'rotateY(360deg)' })),
+      state('normal', style({ transform: 'rotateY(0deg)' })),
+      transition('normal <=> girada', animate('0.5s ease-in-out'))
     ])
   ]
 })
@@ -37,21 +42,19 @@ export class CartaComponent /*implements AfterViewChecked*/ {
   constructor(private cdRef: ChangeDetectorRef) {
   }
 
-  girarCarta(carta: HTMLElement) {
+  girarCarta() {
     if (!this.carta.estaGirada && !this.carta.estaEmparejada) {
       this.cartaGirada.emit(this.carta); // Notificar al inicio.component que se ha girado una carta
-      // carta.classList.add('girada');
-      if (carta.classList.contains('girada')) {
-        carta.classList.remove('girada'); // Si ya está girada, la quitamos
-      } else {
-        carta.classList.add('girada'); // Si no está girada, la agregamos
-      }
     }
   }
 
 
   get estadoCarta() {
     return this.carta.estaEmparejada ? 'oculto' : 'visible'; //Devuelve oculto si está emparejada o visible si todavía no está emparejada
+  }
+
+  get estaGirada () {
+    return this.carta.estaGirada ? 'girada' : 'normal';
   }
 
   /*ngAfterViewChecked(): void { //Actualiza cuando detecta cambios para ejecutar el get estadoCarta ya que de eso depende el efecto de desaparecer
