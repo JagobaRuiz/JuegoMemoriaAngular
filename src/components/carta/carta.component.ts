@@ -30,7 +30,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
     ])
   ]
 })
-export class CartaComponent implements AfterViewChecked {
+export class CartaComponent /*implements AfterViewChecked*/ {
   @Input() carta!: Carta;
   @Output() cartaGirada = new EventEmitter<Carta>();
 
@@ -40,6 +40,7 @@ export class CartaComponent implements AfterViewChecked {
   girarCarta() {
     if (!this.carta.estaGirada && !this.carta.estaEmparejada) {
       this.cartaGirada.emit(this.carta); // Notificar al inicio.component que se ha girado una carta
+      this.cdRef.detectChanges();
     }
   }
 
@@ -48,7 +49,7 @@ export class CartaComponent implements AfterViewChecked {
     return this.carta.estaEmparejada ? 'oculto' : 'visible'; //Devuelve oculto si está emparejada o visible si todavía no está emparejada
   }
 
-  ngAfterViewChecked(): void { //Actualiza cuando detecta cambios para ejecutar el get estadoCarta ya que de eso depende el efecto de desaparecer
-    this.cdRef.detectChanges();
-  }
+  /*ngAfterViewChecked(): void { //Actualiza cuando detecta cambios para ejecutar el get estadoCarta ya que de eso depende el efecto de desaparecer
+    // this.cdRef.detectChanges();
+  }*/
 }
