@@ -40,7 +40,9 @@ export class CartaComponent /*implements AfterViewChecked*/ {
   girarCarta() {
     if (!this.carta.estaGirada && !this.carta.estaEmparejada) {
       this.cartaGirada.emit(this.carta); // Notificar al inicio.component que se ha girado una carta
-      this.cdRef.detectChanges();
+      setTimeout(() => {
+        this.cdRef.detectChanges(); // Espera unos milisegundos antes de forzar el cambio
+      }, 50);
     }
   }
 
