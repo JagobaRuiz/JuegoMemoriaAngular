@@ -4,6 +4,7 @@
   border-radius: 10px;
   cursor: pointer;
   will-change: transform;
+  backface-visibility: hidden;
   transition: transform 0.4s;
   transform-style: preserve-3d;
   position: relative;
