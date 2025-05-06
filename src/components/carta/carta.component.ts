@@ -35,11 +35,11 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
     ])
   ]
 })
-export class CartaComponent /*implements AfterViewChecked*/ {
+export class CartaComponent {
   @Input() carta!: Carta;
   @Output() cartaGirada = new EventEmitter<Carta>();
 
-  constructor(private cdRef: ChangeDetectorRef) {
+  constructor() {
   }
 
   girarCarta() {
@@ -56,8 +56,4 @@ export class CartaComponent /*implements AfterViewChecked*/ {
   get estaGirada () {
     return this.carta.estaGirada ? 'girada' : 'normal';
   }
-
-  /*ngAfterViewChecked(): void { //Actualiza cuando detecta cambios para ejecutar el get estadoCarta ya que de eso depende el efecto de desaparecer
-    // this.cdRef.detectChanges();
-  }*/
 }
