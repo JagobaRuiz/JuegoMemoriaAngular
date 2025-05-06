@@ -3,6 +3,7 @@
   height: 150px;
   border-radius: 10px;
   cursor: pointer;
+  will-change: transform;
   transition: transform 0.4s;
   transform-style: preserve-3d;
   position: relative;
