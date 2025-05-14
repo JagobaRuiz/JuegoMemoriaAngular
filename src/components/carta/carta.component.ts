@@ -29,7 +29,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
       transition('visible => oculto', [animate('0.5s ease-out')])
     ]),
     trigger('girarCarta', [
-      state('girada', style({ transform: 'rotateY(360deg)' })),
+      state('girada', style({ transform: 'rotateY(90deg)' })),
       state('normal', style({ transform: 'rotateY(0deg)' })),
       transition('normal <=> girada', animate('0.5s ease-in-out'))
     ])
