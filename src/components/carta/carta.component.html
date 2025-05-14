@@ -1,5 +1,15 @@
-<div class="carta" [@desaparecer]="estadoCarta" [@girarCarta]= "estaGirada" [ngClass]="{'girada': carta.estaGirada, 'oculto': carta.estaEmparejada }" (click)="girarCarta()">
-  <img class="foto-carta" *ngIf="carta.estaGirada || carta.estaEmparejada" [ngSrc]="carta.imagen" width="100" height="150" alt="">
-  <img *ngIf="!carta.estaGirada" class="parte-trasera" [ngSrc]="'assets/cartas/parte_trasera.png'" alt="" width="100"
-       height="150">
+<!--<div class="carta" [@desaparecer]="estadoCarta" [@girarCarta]= "estaGirada" [ngClass]="{'girada': carta.estaGirada, 'oculto': carta.estaEmparejada }" (click)="girarCarta()">-->
+<!--  <img class="foto-carta" *ngIf="carta.estaGirada || carta.estaEmparejada" [ngSrc]="carta.imagen" width="100" height="150" alt="">-->
+<!--  <img *ngIf="!carta.estaGirada" class="parte-trasera" [ngSrc]="'assets/cartas/parte_trasera.png'" alt="" width="100"-->
+<!--       height="150">-->
+<!--</div>-->
+
+
+<div class="carta" [@desaparecer]="estadoCarta" [@girarCarta]="estaGirada" (click)="girarCarta()">
+  <div class="dorso">
+    <img class="foto-carta" [ngSrc]="carta.imagen" width="100" height="150" alt="">
+  </div>
+  <div class="frente">
+    <img class="parte-trasera" [ngSrc]="'assets/cartas/parte_trasera.png'" width="100" height="150" alt="">
+  </div>
 </div>
